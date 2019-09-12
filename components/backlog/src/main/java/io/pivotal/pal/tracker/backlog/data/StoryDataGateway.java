@@ -44,6 +44,12 @@ public class StoryDataGateway {
         );
     }
 
+    public List<StoryRecord> findRecentStories(int maxStories) {
+        return jdbcTemplate.query(
+                "select id, project_id, name from stories order by id desc LIMIT ?",
+                rowMapper, maxStories
+        );
+    }
 
     private StoryRecord find(long id) {
         return jdbcTemplate.queryForObject(
